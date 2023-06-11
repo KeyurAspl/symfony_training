@@ -3,3 +3,56 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# Category Routes
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+    methods: GET|HEAD
+
+
+ajax_get_categories:
+    path: /ajax-get-categories
+    controller: App\Controller\CategoryController::getAjaxCategories
+    methods: POST
+
+
+app_login:
+    path: /login
+    controller: App\Controller\LoginController::index
+
+app_logout:
+    path: /logout
+    controller: App\Controller\LoginController::logout
+
+app_register:
+    path: /register
+    controller: App\Controller\RegisterController::register
+
+
+
+
+# User Listing Routes
+listings_create:
+    path: /listings/create
+    controller: App\Controller\ListingController::create
+
+
+
+# Testing Routes
+testing:
+    path: /testing
+    controller: App\Controller\TestController::index
+
+test_generate_random_color:
+    path: /generate-random-color
+    controller: App\Controller\TestController::generateRandomColor
+
+test_send_notification:
+    path: /send-notification
+    controller: App\Controller\TestController::sendNotification
+
+
+test_render_controller_in_twig:
+    path: /render-controller
+    controller: App\Controller\TestController::renderController

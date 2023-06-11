@@ -1,0 +1,271 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Add Listing{% endblock %}
+
+{% block content %}
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <div class="row align-items-center text-center">
+                <div class="col-md-12 col-12">
+                    <h2 class="breadcrumb-title">Add Listing</h2>
+                    <nav aria-label="breadcrumb" class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<?php echo BASEURL; ?>">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Listing</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-content">
+        <div class="container">
+            <form action="{{ path('listings_create') }}" method="post" novalidate="novalidate">
+                <div class="profile-content">
+                    <div class="messages-form">
+                        <div class="col-lg-12">
+                            {% include 'partials/flash.html.twig' %}
+
+                            {% if form_errors(listingForm) %}
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        {% for error in form_errors(listingForm) %}
+                                            <li>{{ error.message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Basic information</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="col-form-label">Listing Title <span>*</span></label>
+                                    {{ form_widget(listingForm.title, {'attr': {'class': 'form-control pass-input'}}) }}
+                                    {{ form_errors(listingForm.title) }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Listing Description <span>*</span></label>
+                                    {{ form_widget(listingForm.description, {'attr': {'class': 'form-control listingdescription'}}) }}
+                                    {{ form_errors(listingForm.description) }}
+                                </div>
+{#                                <div class="form-group">#}
+{#                                    <label class="col-form-label label-heading">Category <span>*</span></label>#}
+{#                                    <div class="row category-listing">#}
+{#                                        <?php $allCategories = $category->get(); ?>#}
+{#                                        <?php foreach ($allCategories as $category): ?>#}
+{#                                        <div class="col-lg-3">#}
+{#                                            <label class="custom_check">#}
+{#                                                <input type="radio" name="category_id"#}
+{#                                                       value="<?php echo $category['id']; ?>"#}
+{#                                                <?php echo isset($_POST['category_id']) && $_POST['category_id'] == $category['id'] ? "checked" : ""; ?>#}
+{#                                                >#}
+{#                                                <span class="checkmark"></span> <?php echo $category['name']; ?>#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                        <?php endforeach; ?>#}
+{#                                    </div>#}
+{#                                    <div class="text-danger">#}
+{#                                        <?php echo $errors['category_id'] ?? ''; ?>#}
+{#                                    </div>#}
+{#                                </div>#}
+                                <div class="form-group">
+                                    <label class="col-form-label">Price <span>*</span></label>
+                                    {{ form_widget(listingForm.price, {'attr': {'class': 'form-control pass-input'}}) }}
+                                    {{ form_errors(listingForm.price) }}
+                                </div>
+                            </div>
+                        </div>
+{#                        <div class="card">#}
+{#                            <div class="card-header">#}
+{#                                <h4>Features information <span class="text-danger">*</span></h4>#}
+{#                            </div>#}
+{#                            <div class="card-body">#}
+{#                                <div class="form-group featuresform-list mb-0">#}
+{#                                    <ul>#}
+{#                                        <?php $allFeatures = $listingFeatures->get(); ?>#}
+{#                                        <?php foreach ($allFeatures as $feature): ?>#}
+{#                                        <li>#}
+{#                                            <label class="custom_check">#}
+{#                                                <input type="checkbox" name="features[]"#}
+{#                                                       value="<?php echo $feature['id'] ?>"#}
+{#                                                <?php echo isset($_POST['features']) && in_array($feature['id'], $_POST['features']) ? "checked" : ""; ?>#}
+{#                                                >#}
+{#                                                <span class="checkmark"></span> <?php echo $feature['name']; ?>#}
+{#                                            </label>#}
+{#                                        </li>#}
+{#                                        <?php endforeach; ?>#}
+{#                                    </ul>#}
+{#                                    <div class="clearfix"></div>#}
+{#                                    <div class="text-danger">#}
+{#                                        <?php echo $errors['features'] ?? ''; ?>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Location information</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="col-form-label">Address <span>*</span></label>
+                                    {{ form_widget(listingForm.address, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(listingForm.address) }}
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group formlast-input">
+                                            <label class="col-form-label">City <span>*</span></label>
+                                            {{ form_widget(listingForm.city, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(listingForm.city) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group formlast-input">
+                                            <label class="col-form-label">Pincode <span>*</span></label>
+                                            {{ form_widget(listingForm.pincode, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(listingForm.pincode) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Contact Information </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group formlast-input">
+                                            <label class="col-form-label">Email</label>
+                                            {{ form_widget(listingForm.email, {'attr': {'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled', 'value': app.user.email ?? ''}}) }}
+                                            {{ form_errors(listingForm.email) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group formlast-input">
+                                            <label class="col-form-label">Phone</label>
+                                            {{ form_widget(listingForm.phone, {'attr': {'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled', 'value': app.user.phone ?? ''}}) }}
+                                            {{ form_errors(listingForm.phone) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if app.user.facebookUrl is not empty or app.user.twitterUrl is not empty or app.user.googleUrl is not empty or app.user.instagramUrl is not empty %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Social Information </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row social-info">
+                                    {{ dump(app.user) }}
+                                    {% if app.user.facebookUrl is defined and app.user.facebookUrl is not empty %}
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Facebook</label>
+                                            <div class="pass-group group-img">
+                                                <span class="lock-icon"><i class="fab fa-facebook-f"></i></span>
+                                                {{ form_widget(listingForm.facebook_url, {'attr': {'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled', 'value': app.user.facebookUrl ?? ''}}) }}
+                                                {{ form_errors(listingForm.facebook_url) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if app.user.twitterUrl is defined and app.user.twitterUrl is not empty %}
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Twitter</label>
+                                            <div class="pass-group group-img">
+                                                <span class="lock-icon"><i class="fab fa-twitter"></i></span>
+                                                {{ form_widget(listingForm.twitter_url, {'attr': {'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled', 'value': app.user.twitterUrl ?? ''}}) }}
+                                                {{ form_errors(listingForm.twitter_url) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="row social-info">
+                                    {% if app.user.googleUrl is defined and app.user.googleUrl is not empty %}
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group formlast-input lat-input">
+                                            <label class="col-form-label">Google+</label>
+                                            <div class="pass-group group-img">
+                                                    <span class="lock-icon"><i
+                                                                class="fa-brands fa-google-plus-g"></i></span>
+                                                {{ form_widget(listingForm.google_url, {'attr': {'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled', 'value': app.user.googleUrl ?? ''}}) }}
+                                                {{ form_errors(listingForm.google_url) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if app.user.instagramUrl is defined and app.user.instagramUrl is not empty %}
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group formlast-input">
+                                            <label class="col-form-label">Instagram</label>
+                                            <div class="pass-group group-img">
+                                                <span class="lock-icon"><i class="fab fa-instagram"></i></span>
+                                                {{ form_widget(listingForm.instagram_url, {'attr': {'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled', 'value': app.user.instagramUrl ?? ''}}) }}
+                                                {{ form_errors(listingForm.instagram_url) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="card media-section">
+                            <div class="card-header">
+                                <h4>Gallery <span class="text-danger">*</span></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="gallery-media">
+                                    <!--                            <div class="galleryimg-upload">-->
+                                    <!--                                <div class="gallery-upload">-->
+                                    <!--                                    <img src="assets/img/gallery/gallerymedia-1.jpg" class="img-fluid" alt="">-->
+                                    <!--                                    <a href="javascript:void(0)" class="profile-img-del"><i-->
+                                    <!--                                                class="feather-trash-2"></i></a>-->
+                                    <!--                                </div>-->
+                                    <!--                                <div class="gallery-upload">-->
+                                    <!--                                    <img src="assets/img/gallery/gallerymedia-2.jpg" class="img-fluid" alt="">-->
+                                    <!--                                    <a href="javascript:void(0)" class="profile-img-del"><i-->
+                                    <!--                                                class="feather-trash-2"></i></a>-->
+                                    <!--                                </div>-->
+                                    <!--                                <div class="gallery-upload">-->
+                                    <!--                                    <img src="assets/img/gallery/gallerymedia-3.jpg" class="img-fluid" alt="">-->
+                                    <!--                                    <a href="javascript:void(0)" class="profile-img-del"><i-->
+                                    <!--                                                class="feather-trash-2"></i></a>-->
+                                    <!--                                </div>-->
+                                    <!--                                <div class="gallery-upload">-->
+                                    <!--                                    <img src="assets/img/gallery/gallerymedia-4.jpg" class="img-fluid" alt="">-->
+                                    <!--                                    <a href="javascript:void(0)" class="profile-img-del"><i-->
+                                    <!--                                                class="feather-trash-2"></i></a>-->
+                                    <!--                                </div>-->
+                                    <!--                                <div class="gallery-upload">-->
+                                    <!--                                    <img src="assets/img/gallery/gallerymedia-5.jpg" class="img-fluid" alt="">-->
+                                    <!--                                    <a href="javascript:void(0)" class="profile-img-del"><i-->
+                                    <!--                                                class="feather-trash-2"></i></a>-->
+                                    <!--                                </div>-->
+                                    <!--                            </div>-->
+
+{#                                    <div class="settings-upload-btn">#}
+{#                                        <input type="file" accept="image/*" name="images[]" class="hide-input image-upload"#}
+{#                                               id="file2" multiple>#}
+{#                                        <label for="file2" class="file-upload">Upload File</label>#}
+{#                                    </div>#}
+
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit" name="submit"> Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

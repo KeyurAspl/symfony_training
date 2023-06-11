@@ -1,0 +1,14 @@
+{% if categories is not empty %}
+{% for category in categories %}
+    <div class="col-lg-2 col-md-3 col-sm-6">
+        <a href="categories.html" class="category-links">
+            <h5>{{ category.name }}</h5>
+            <img src="{{ asset(category.image) }}" alt="icons">
+        </a>
+    </div>
+{% endfor %}
+{% else %}
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <p class="text-center">No categories found.</p>
+    </div>
+{% endif %}
