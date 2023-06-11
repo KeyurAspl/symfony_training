@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Event\UserRegisteredEvent;
 use App\Form\RegistrationFormType;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 
 class RegisterController extends AbstractController
@@ -18,7 +20,7 @@ class RegisterController extends AbstractController
 
 
 
-    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher): Response
     {
         $form = $this->createForm(RegistrationFormType::class);
         $form->handleRequest($request);
@@ -46,6 +48,9 @@ class RegisterController extends AbstractController
 
             // Flash a success message to the user
             $this->addFlash('success', 'You have successfully registered!. Please login now.');
+            $event = new UserRegisteredEvent(['email' => $user->getEmail(), 'name' => $user->getName()]);
+            $eventDispatcher->dispatch($event);
+
 
             // Redirect the user to a different page after successful registration
             return $this->redirectToRoute('app_login');

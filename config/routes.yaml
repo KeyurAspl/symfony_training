@@ -52,7 +52,6 @@ test_send_notification:
     path: /send-notification
     controller: App\Controller\TestController::sendNotification
 
-
 test_render_controller_in_twig:
     path: /render-controller
     controller: App\Controller\TestController::renderController

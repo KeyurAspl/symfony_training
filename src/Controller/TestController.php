@@ -42,6 +42,7 @@ class TestController extends AbstractController
 
         // Send the notification
         $emailNotifier->sendNotification($recipientEmail, $subject, $message);
+        $this->addFlash('success', 'Notification has been sent. Please check your email address');
 
         return $this->redirectToRoute('testing');
 

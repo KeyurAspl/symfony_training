@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Service;
+namespace App\Event;
 
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
-
-class EmailNotifier
+class UserRegisteredListener
 {
     private $mailer;
 
@@ -16,13 +14,14 @@ class EmailNotifier
         $this->mailer = $mailer;
     }
 
-    public function sendNotification(string $recipientEmail, string $subject, string $message): void
+    public function onUserRegistered(UserRegisteredEvent $event)
     {
+        $userData = $event->getUserData();
         $email = (new Email())
             ->from($this->fromEmail)
-            ->to($recipientEmail)
-            ->subject($subject)
-            ->text($message);
+            ->to($userData['email'])
+            ->subject('Welcome to classified ads.')
+            ->text('Hello '.$userData['name'].'Your account is successfully created.');
 
         $this->mailer->send($email);
     }
