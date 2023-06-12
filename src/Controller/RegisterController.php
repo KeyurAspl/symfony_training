@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 
@@ -20,8 +21,13 @@ class RegisterController extends AbstractController
 
 
 
-    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher): Response
+    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, Security $security): Response
     {
+        if ($security->getUser()) {
+            // User is already authenticated, redirect to the home page or any desired page
+            return $this->redirectToRoute('home');
+        }
+
         $form = $this->createForm(RegistrationFormType::class);
         $form->handleRequest($request);
 

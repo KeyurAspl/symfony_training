@@ -4,3 +4,5 @@ twig:
 when@test:
     twig:
         strict_variables: true
+        form_themes:
+            - 'form/category_checkbox_widget.html.twig'

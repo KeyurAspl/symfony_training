@@ -58,3 +58,4 @@ services:
             $requestStack: '@request_stack'
         tags:
             - { name: kernel.event_subscriber }
+

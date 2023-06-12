@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Listing;
 use App\Form\ListingType;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class ListingController extends AbstractController
         ]);
     }
 
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, CategoryRepository $categoryRepository): Response
     {
 
         $listing = new Listing();
@@ -28,6 +29,10 @@ class ListingController extends AbstractController
 
         $form = $this->createForm(ListingType::class, $listing);
         $form->handleRequest($request);
+
+
+
+
 
         if($form->isSubmitted() && $form->isValid()) {
 
@@ -38,8 +43,10 @@ class ListingController extends AbstractController
             dd('submitted');
         }
 
+        $categories = $categoryRepository->getAllCategories();
         return $this->render('listing/create.html.twig', [
-            'listingForm' => $form->createView()
+            'listingForm' => $form->createView(),
+            'categories' => $categories
         ]);
     }
 }
