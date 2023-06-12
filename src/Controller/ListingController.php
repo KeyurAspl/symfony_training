@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ListingController extends AbstractController
 {
@@ -20,24 +21,18 @@ class ListingController extends AbstractController
         ]);
     }
 
+
     public function create(Request $request, CategoryRepository $categoryRepository): Response
     {
 
         $listing = new Listing();
-        $listing->setCreatedAt(new \DateTimeImmutable()); // Set the created_at value here
-        $listing->setUpdatedAt(new \DateTimeImmutable());
+
 
         $form = $this->createForm(ListingType::class, $listing);
-        $form->handleRequest($request);
-
-
-
-
+        $form->handleRequest($request); // This line is causing  an error
 
         if($form->isSubmitted() && $form->isValid()) {
-
-            $listing->setCreatedAt(new \DateTimeImmutable());
-            $listing->setUpdatedAt(new \DateTimeImmutable());
+            dd($form->getData());
 
 
             dd('submitted');

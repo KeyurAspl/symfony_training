@@ -24,7 +24,7 @@
                 <div class="profile-content">
                     <div class="messages-form">
                         <div class="col-lg-12">
-                            {% include 'partials/flash.html.twig' %}
+{#                            {% include 'partials/flash.html.twig' %}#}
 
                             {% if form_errors(listingForm) %}
                                 <div class="alert alert-danger">
@@ -56,33 +56,48 @@
                                     <label class="col-form-label label-heading">Category <span>*</span></label>
 
                                     <div class="row category-listing">
-                                        {{ form_widget(listingForm.category, {'attr': {'class': 'form-control col-lg-3'}}) }}
+                                        {# <div class="col-lg-3"> #}
+
+                                        {# {{ form_widget(listingForm.category, {'attr': {'class': 'form-control col-lg-3'}}) }} #}
+                                        {# </div> #}
+
+                                        {% for category in categories %}
+                                            <div class="col-lg-3">
+                                                <label class="custom_check">
+                                                    <input type="radio" name="category"
+                                                           value="{{ category.id }}"
+                                                            {# {% if category.id == selectedCategoryId %}checked{% endif %} #}
+                                                            multiple
+                                                    >
+                                                    <span class="checkmark"></span> {{ category.name }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
                                     </div>
                                     {{ form_errors(listingForm.category) }}
-
                                 </div>
 
                                 {{ dump(listingForm.category) }}
-                                <div class="form-group">
-                                    <label class="col-form-label label-heading">Category <span>*</span></label>
-                                    <div class="row category-listing">
-                                        <?php $allCategories = $category->get(); ?>
-                                        <?php foreach ($allCategories as $category): ?>
-                                        <div class="col-lg-3">
-                                            <label class="custom_check">
-                                                <input type="radio" name="category_id"
-                                                       value="<?php echo $category['id']; ?>"
-                                                <?php echo isset($_POST['category_id']) && $_POST['category_id'] == $category['id'] ? "checked" : ""; ?>
-                                                >
-                                                <span class="checkmark"></span> <?php echo $category['name']; ?>
-                                            </label>
-                                        </div>
-                                        <?php endforeach; ?>
-                                    </div>
-                                    <div class="text-danger">
-                                        <?php echo $errors['category_id'] ?? ''; ?>
-                                    </div>
-                                </div>
+                                {# <div class="form-group"> #}
+                                {# <label class="col-form-label label-heading">Category <span>*</span></label> #}
+                                {# <div class="row category-listing"> #}
+                                {# <?php $allCategories = $category->get(); ?> #}
+                                {# <?php foreach ($allCategories as $category): ?> #}
+                                {# <div class="col-lg-3"> #}
+                                {# <label class="custom_check"> #}
+                                {# <input type="radio" name="category_id" #}
+                                {# value="<?php echo $category['id']; ?>" #}
+                                {# <?php echo isset($_POST['category_id']) && $_POST['category_id'] == $category['id'] ? "checked" : ""; ?> #}
+                                {# > #}
+                                {# <span class="checkmark"></span> <?php echo $category['name']; ?> #}
+                                {# </label> #}
+                                {# </div> #}
+                                {# <?php endforeach; ?> #}
+                                {# </div> #}
+                                {# <div class="text-danger"> #}
+                                {# <?php echo $errors['category_id'] ?? ''; ?> #}
+                                {# </div> #}
+                                {# </div> #}
                                 <div class="form-group">
                                     <label class="col-form-label">Price <span>*</span></label>
                                     {{ form_widget(listingForm.price, {'attr': {'class': 'form-control pass-input'}}) }}

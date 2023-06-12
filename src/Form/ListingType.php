@@ -30,21 +30,18 @@ class ListingType extends AbstractType
 
         $builder
             ->add('title')
-            ->add('images')
+//            ->add('images')
             ->add('description')
             ->add('price')
             ->add('features')
             ->add('address')
             ->add('city')
             ->add('pincode')
-            ->add('created_at')
-            ->add('updated_at')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choices' => $categories,
                 'choice_label' => 'name',
                 'expanded' => true,
-                'multiple' => true,
             ])
             ->add('email', EmailType::class, [
                 'mapped' => false
