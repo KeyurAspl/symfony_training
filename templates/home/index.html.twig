@@ -43,17 +43,8 @@
                         <h2>Our <span class="title-left">Cat</span>egory</h2>
                         <p>Buy and Sell Everything from Used Our Top Category</p>
                     </div>
-                    <div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
-                        <a href="categories.html" class="btn  btn-view">View All</a>
-                    </div>
                 </div>
             </div>
-
-            {% if app.user %}
-                <p>Welcome, {{ app.user.email }}</p>
-            {% else %}
-                <p>Not logged in</p>
-            {% endif %}
 
             {# Ajax Load Categories #}
             <div class="row" id="loadCategories">

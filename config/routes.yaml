@@ -16,7 +16,6 @@ ajax_get_categories:
     controller: App\Controller\CategoryController::getAjaxCategories
     methods: POST
 
-
 app_login:
     path: /login
     controller: App\Controller\LoginController::index
@@ -29,7 +28,9 @@ app_register:
     path: /register
     controller: App\Controller\RegisterController::register
 
-
+user_profile:
+    path: /profile
+    controller: App\Controller\UserController::profile
 
 
 # User Listing Routes

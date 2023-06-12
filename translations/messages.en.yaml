@@ -1,0 +1,6 @@
+register: Register
+login: Login
+add_listing: Add Listing
+profile_settings: Profile Settings
+my_listing: My Listing
+logout: Logout

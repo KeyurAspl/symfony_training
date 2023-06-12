@@ -15,6 +15,7 @@ services:
             # pass this value to any $adminEmail argument for any service
             # that's defined in this file (including controller arguments)
             $fromEmail: 'keyur@aum.bz'
+            $defaultFallbackLocale: '%kernel.default_locale%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -44,3 +45,16 @@ services:
     App\Event\UserRegisteredListener:
         tags:
             - { name: kernel.event_listener, event: App\Event\UserRegisteredEvent, method: onUserRegistered }
+
+#    App\Event\LanguageListener:
+#        arguments:
+#            $session: '@session'
+#        tags:
+#            - { name: kernel.event_subscriber }
+#        public: true
+
+    App\Event\LanguageListener:
+        arguments:
+            $requestStack: '@request_stack'
+        tags:
+            - { name: kernel.event_subscriber }
