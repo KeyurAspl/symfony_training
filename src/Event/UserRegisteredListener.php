@@ -2,6 +2,8 @@
 
 namespace App\Event;
 
+use App\Entity\User;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -22,6 +24,25 @@ class UserRegisteredListener
             ->to($userData['email'])
             ->subject('Welcome to classified ads.')
             ->text('Hello '.$userData['name'].'Your account is successfully created.');
+
+        $this->mailer->send($email);
+    }
+
+    public function postPersist(LifecycleEventArgs $args): void
+    {
+        $entity = $args->getObject();
+
+        // Check if the registered entity is a User
+        if (!$entity instanceof User) {
+            return;
+        }
+
+        // Send a welcome email to the registered user
+        $email = (new Email())
+            ->from('noreply@example.com')
+            ->to($entity->getEmail())
+            ->subject('Welcome to our website')
+            ->text('This email is fired from doctrine postPersist event after user registered.');
 
         $this->mailer->send($email);
     }

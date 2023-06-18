@@ -12,8 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+
 class ListingController extends AbstractController
 {
+
     public function index(): Response
     {
         return $this->render('listing/index.html.twig', [
@@ -21,10 +23,8 @@ class ListingController extends AbstractController
         ]);
     }
 
-
     public function create(Request $request, CategoryRepository $categoryRepository): Response
     {
-
         $listing = new Listing();
 
 
@@ -32,10 +32,7 @@ class ListingController extends AbstractController
         $form->handleRequest($request); // This line is causing  an error
 
         if($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData());
 
-
-            dd('submitted');
         }
 
         $categories = $categoryRepository->getAllCategories();

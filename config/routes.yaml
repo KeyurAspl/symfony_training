@@ -11,6 +11,7 @@ home:
     methods: GET|HEAD
 
 
+
 ajax_get_categories:
     path: /ajax-get-categories
     controller: App\Controller\CategoryController::getAjaxCategories
@@ -34,6 +35,10 @@ user_profile:
 
 
 # User Listing Routes
+listings_index:
+    path: /listings
+    controller: App\Controller\ListingController::index
+
 listings_create:
     path: /listings/create
     controller: App\Controller\ListingController::create

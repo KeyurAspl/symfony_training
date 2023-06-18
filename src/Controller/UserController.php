@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserController extends AbstractController
 {
-
     public function profile(Request $request, Session $session, string $defaultFallbackLocale): Response
     {
         $form = $this->createForm(LanguageType::class, [

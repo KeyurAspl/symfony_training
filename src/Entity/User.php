@@ -309,4 +309,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->updated_at = new \DateTimeImmutable();
     }
+
+
+    public function userProfile() {
+        $query = $this->entityManager->createQueryBuilder();
+        $query->select('users.name', 'profile.phone')
+            ->from(User::class, 'user')
+            ->leftJoin('user.profile', 'profile')->findOne();
+
+
+        $query = $query->getQuery();
+        return $query->getResult();
+
+    }
 }

@@ -45,6 +45,7 @@ services:
     App\Event\UserRegisteredListener:
         tags:
             - { name: kernel.event_listener, event: App\Event\UserRegisteredEvent, method: onUserRegistered }
+            - { name: doctrine.event_listener, event: postPersist }
 
 #    App\Event\LanguageListener:
 #        arguments:
