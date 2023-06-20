@@ -4,7 +4,7 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-# Category Routes
+
 home:
     path: /
     controller: App\Controller\HomeController::index
@@ -16,6 +16,11 @@ ajax_get_categories:
     path: /ajax-get-categories
     controller: App\Controller\CategoryController::getAjaxCategories
     methods: POST
+
+category_listings:
+    path: /category/{category}/listings
+    controller: App\Controller\CategoryController::getCategoryListings
+    methods: GET
 
 app_login:
     path: /login
@@ -43,6 +48,16 @@ listings_create:
     path: /listings/create
     controller: App\Controller\ListingController::create
 
+
+
+countries:
+    path: /countries
+    controller: App\Controller\CountryController::index
+
+
+not_found:
+    path: /not-found
+    controller: App\Controller\NotFoundController::showNotFound
 
 
 # Testing Routes

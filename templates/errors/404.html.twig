@@ -4,5 +4,16 @@
 
 {% block content %}
 
-<h1>404</h1>
+    <div class="col-lg-6 mx-auto mt-5">
+        <div class="error-wrap">
+            <div class="error-logo">
+                <a href="index.html"><img class="img-fluid" src="{{ asset('img/logo.svg') }}" alt="img"></a>
+            </div>
+            <h2>Something went wrong</h2>
+            <div class="error-img">
+                <img class="img-fluid" src="{{ asset('img/404-error.jpg') }}" alt="img">
+            </div>
+            <a href="{{ path('home') }}" class="btn btn-primary rounded-pill">Back to Home</a>
+        </div>
+    </div>
 {% endblock %}

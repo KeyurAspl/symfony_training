@@ -28,6 +28,12 @@ class UserRegisteredListener
         $this->mailer->send($email);
     }
 
+    /**
+     * @param LifecycleEventArgs $args
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     *  prePersist, postPersist, preUpdate, postUpdate, preRemove, postRemove, preFlush, postLoad
+     */
+
     public function postPersist(LifecycleEventArgs $args): void
     {
         $entity = $args->getObject();
