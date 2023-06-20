@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'CreateUser',
     description: 'Add a short description for your command',
 )]
-class CreateUserCommand extends Command
+class UserUpdateCommand extends Command
 {
     protected function configure(): void
     {

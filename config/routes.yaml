@@ -4,7 +4,6 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-
 home:
     path: /
     controller: App\Controller\HomeController::index
@@ -76,3 +75,6 @@ test_send_notification:
 test_render_controller_in_twig:
     path: /render-controller
     controller: App\Controller\TestController::renderController
+
+
+

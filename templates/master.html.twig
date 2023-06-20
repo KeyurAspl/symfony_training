@@ -59,6 +59,7 @@
                     <ul class="main-nav">
                         <li><a href="{{ path('home') }}">Home</a></li>
                         <li><a href="{{ path('testing') }}">Test</a></li>
+                        <li><a href="{{ path('routing_match_expression') }}">Routing</a></li>
                         {% if app.user is not defined and app.user is empty %}
                             <li class="login-link">
                                 <a href="{{ path('app_register') }}">{{ 'register' |trans }}</a>
