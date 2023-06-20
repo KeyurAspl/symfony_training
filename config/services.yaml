@@ -60,3 +60,9 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    App\Command\RemoveListingRecordsCommand:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+        tags:
+            - { name: 'console.command' }
+
