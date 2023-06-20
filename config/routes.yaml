@@ -47,6 +47,13 @@ listings_create:
     path: /listings/create
     controller: App\Controller\ListingController::create
 
+user_listings:
+    path: /my-listings/
+    controller: App\Controller\ListingController::userListings
+
+delete_listing:
+    path: /delete-listing/{listing}
+    controller: App\Controller\ListingController::deleteListing
 
 
 countries:

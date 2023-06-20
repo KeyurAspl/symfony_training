@@ -1,0 +1,91 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Test{% endblock %}
+
+{% block content %}
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <div class="row align-items-center text-center">
+                <div class="col-md-12 col-12">
+                    <h2 class="breadcrumb-title">My Listings</h2>
+                    <nav aria-label="breadcrumb" class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">My Listings</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dashboard-content">
+        <div class="container">
+            <div class="dash-listingcontent dashboard-info">
+
+                {% include 'partials/flash.html.twig' %}
+
+                <div class="dash-cards card">
+                    <div class="card-header">
+                        <h4>My Listings</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="listing-table datatable" id="listdata-table">
+                                <thead>
+                                <tr>
+                                    <th class="no-sort">Image</th>
+                                    <th class="no-sort">Details</th>
+                                    <th class="no-sort">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for listing in listings %}
+                                    <tr>
+                                        <td>
+                                            <div class="listingtable-img">
+                                                <a href="javascript:void(0);">
+                                                    <img class="img-fluid avatar-img"
+                                                         src="/{{ listing.images }}"
+                                                         alt=""></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h6><a href="javascript:void(0);">{{ listing.title }}</a></h6>
+                                            <div class="listingtable-rate"><a href="javascript:void(0)"
+                                                                              class="cat-icon"><i
+                                                            class="fa-regular fa-circle-stop"></i>
+                                                </a> <span
+                                                        class="discount-amt">
+                                                     <span class="WebRupee">&#x20B9;</span>
+                                                {{ listing.price }}
+                                                </span>
+                                            </div>
+                                            <p>{{ listing.description }}</p>
+                                        </td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="{{ path('delete_listing', { listing: listing.id }) }}" class="action-btn btn-trash"><i
+                                                            class="fa fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
