@@ -2,10 +2,13 @@
 
 namespace App\Service;
 
+use App\Traits\LoggerTrait;
 use Psr\Log\LoggerInterface;
 
 class RandomColorGenerator
 {
+
+    use LoggerTrait;
 
     /**
      * @param LoggerInterface $logger
@@ -14,6 +17,15 @@ class RandomColorGenerator
      */
     public function __construct(private LoggerInterface $logger, private string $color)
     {
+
+    }
+
+    /**
+     * Overriding trait
+     */
+    public function generateLog(string $message, LoggerInterface $logger)
+    {
+        $logger->info($message. "-- override");
     }
 
     public function getRandomColor(): string
@@ -30,7 +42,7 @@ class RandomColorGenerator
             '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
         $index = array_rand($colors);
 
-        $this->logger->info('Generated random color ' . $colors[$index]);
+        $this->generateLog('Generated random color ' . $colors[$index], $this->logger);
         return $colors[$index];
     }
 }

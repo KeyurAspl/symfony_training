@@ -31,7 +31,6 @@ services:
     App\Service\RandomColorGenerator:
         arguments:
             $color: 'blue'
-            $logger: '@monolog.logger.request'
 
     App\Service\EmailNotifier:
         arguments:
