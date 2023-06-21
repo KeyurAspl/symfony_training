@@ -23,7 +23,7 @@ class UserRegisteredListener
             ->from($this->fromEmail)
             ->to($userData['email'])
             ->subject('Welcome to classified ads.')
-            ->text('Hello '.$userData['name'].'Your account is successfully created.');
+            ->text('Hello '.$userData['name'].'Your account is successfully created UserRegisteredListener::onUserRegistered.');
 
         $this->mailer->send($email);
     }
@@ -48,7 +48,7 @@ class UserRegisteredListener
             ->from('noreply@example.com')
             ->to($entity->getEmail())
             ->subject('Welcome to our website')
-            ->text('This email is fired from doctrine postPersist event after user registered.');
+            ->text('This email is fired from doctrine postPersist event after user registered UserRegisteredListener::postPersist.');
 
         $this->mailer->send($email);
     }

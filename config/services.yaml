@@ -47,6 +47,10 @@ services:
             - { name: kernel.event_listener, event: App\Event\UserRegisteredEvent, method: onUserRegistered }
             - { name: doctrine.event_listener, event: postPersist }
 
+    App\Event\UserRegisteredSubscriber:
+            tags:
+                - { name: kernel.event_subscriber }
+
 #    App\Event\LanguageListener:
 #        arguments:
 #            $session: '@session'
