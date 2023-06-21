@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/routing', name: 'routing_')]
 class RoutingController extends AbstractController
@@ -75,5 +76,36 @@ class RoutingController extends AbstractController
     public function subDomain(): Response
     {
         return $this->render('routing/sub_domain.html.twig');
+    }
+
+    #[Route(
+        '/get_route/{category}/{listing}',
+        name: 'get_route_params',
+        defaults: ['category' => '1', 'listing' => '2']
+    )]
+    public function getRouteParams(Request $request): Response
+    {
+        $routeName = $request->attributes->get('_route');
+        $routeParameters = $request->attributes->get('_route_params');
+
+        $allAttributes = $request->attributes->all();
+        return $this->render('routing/get_routes.html.twig', [
+            'routeName' => $routeName,
+            'routeParameters' => $routeParameters,
+            'allParameters' => $allAttributes
+        ]);
+    }
+
+
+    #[Route(
+        path: [
+            'en' => '/listing',
+            'hi' => '/लिस्टिंग'
+        ],
+        name: 'localize_routing')
+    ]
+    public function localizeRoute(): Response
+    {
+        return $this->render('routing/localize_routing.html.twig', );
     }
 }
