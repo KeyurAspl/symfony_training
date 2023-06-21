@@ -42,4 +42,5 @@ class CategoryController extends AbstractController
             'listings' => $listings
         ]);
     }
+
 }

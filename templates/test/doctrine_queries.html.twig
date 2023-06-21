@@ -1,0 +1,36 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Routing{% endblock %}
+
+{% block content %}
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <div class="row align-items-center text-center">
+                <div class="col-md-12 col-12">
+                    <h2 class="breadcrumb-title">Testing</h2>
+                    <nav aria-label="breadcrumb" class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ path('testing') }}">Testing</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Doctrine Queries</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 mx-auto">
+
+                    <div class="mb-5">
+                        {{ dump(data) }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -45,6 +45,19 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function getListings(int $categoryId) {
+        $queryBuilder = $this->createQueryBuilder('c');
+        $query = $queryBuilder
+            ->select('c.id', 'c.name', 'l.title') // Add the joined property you want to retrieve
+            ->leftJoin('c.listings', 'l') // Replace 'joinedEntity' with the actual joined entity name
+            ->where('c.id = :value')
+            ->setParameter('value', $categoryId)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */

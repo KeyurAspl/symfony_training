@@ -84,4 +84,7 @@ test_render_controller_in_twig:
     controller: App\Controller\TestController::renderController
 
 
+test_doctrine_queries:
+    path: /doctrine-queries
+    controller: App\Controller\TestController::doctrineQueries
 

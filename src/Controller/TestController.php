@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use App\Service\EmailNotifier;
 use App\Service\RandomColorGenerator;
 use Psr\Log\LoggerInterface;
@@ -53,6 +54,32 @@ class TestController extends AbstractController
         $color =  $this->color->getRandomColor();
         return $this->render('test/render_controller.html.twig', [
             'color' => $color
+        ]);
+    }
+
+
+    public function doctrineQueries(CategoryRepository $categoryRepository) : Response
+    {
+        //$data = $categoryRepository->find(1);
+        //$data = $categoryRepository->findOneBy(['id' => ['lt' => 10]]); //lt, gt lte gte
+//        $data = $categoryRepository->findBy(['id' => [1,2,3]]);
+
+//
+//        $queryBuilder = $categoryRepository->createQueryBuilder('c');
+//        $query = $queryBuilder
+//            ->select('c.id', 'c.name')
+//            ->where('c.name = :value')
+//            ->setParameter('value', 'Automotive')
+//            ->getQuery();
+//        $data = $query->getResult();
+//
+
+
+        // Join query category with listings
+        $data = $categoryRepository->getListings(1);
+
+        return $this->render('test/doctrine_queries.html.twig', [
+            'data' => $data
         ]);
     }
 
